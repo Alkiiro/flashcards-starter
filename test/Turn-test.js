@@ -32,6 +32,7 @@ describe('Turn', () => {
   });
 
   it('should return a string depending on the users guess', () => {
+    turn.evaluateGuess();
     expect(turn.giveFeedback()).to.eql('Correct!');
   });
 });

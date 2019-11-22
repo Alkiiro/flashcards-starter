@@ -18,8 +18,8 @@ describe('Round', () => {
     card2 = new Card(2, 'What shape are wheels?', ['Triangular', 'Square', 'Round'], 'Round');
     card3 = new Card(3, 'Which of the following is typically long-sleeved?', ['jacket', 'tank-top', 'shorts'], 'jacket');
     deck = new Deck([card1, card2, card3]);
-    turn = new Turn('userguess');
-    round = new Round('userguess');
+    turn = new Turn('blue', deck.cards[0]);
+    round = new Round(deck);
   });
 
   it('Should return the current card in play', () => {
@@ -28,14 +28,19 @@ describe('Round', () => {
 
   describe('takeTurn', () => {
     beforeEach(() => {
-      takeTurn();
+      round.takeTurn('blue');
     });
+
     it('Should update the turn count', () => {
-      expect(round.turns).to.eql(2);
+      expect(round.turns).to.eql(1);
     });
 
     it('Should make the next Card the currentCard', () => {
-      expect(round.currentCard).to.eql(card2)
+      expect(round.returnCurrentCard()).to.eql(card2)
+    });
+
+    it('Should store incorrect guesses in an array', () => {
+      expect(round.incorrectGuesses).to.eql([]);
     });
   });
 
