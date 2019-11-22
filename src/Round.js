@@ -18,7 +18,16 @@ class Round {
     turn.giveFeedback()
     this.turns++;
     this.guesses.push(userGuess);
-
+    if (this.guesses.length === this.deck.length) {
+      this.endRound();
+    };
+  };
+  calculatePercentCorrect() {
+    let correctGuesses = this.guesses.length - this.incorrectGuesses.length;
+    return Math.floor((correctGuesses/this.guesses.length) * 100);
+  };
+  endRound() {
+    return `Round Over!  You answered ${this.calculatePercentCorrect()}% of the questions correctly!`;
   };
 };
 

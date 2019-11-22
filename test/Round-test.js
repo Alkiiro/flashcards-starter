@@ -28,7 +28,7 @@ describe('Round', () => {
 
   describe('takeTurn', () => {
     beforeEach(() => {
-      round.takeTurn('blue');
+      round.takeTurn('red');
     });
 
     it('Should update the turn count', () => {
@@ -40,7 +40,19 @@ describe('Round', () => {
     });
 
     it('Should store incorrect guesses in an array', () => {
-      expect(round.incorrectGuesses).to.eql([]);
+      expect(round.incorrectGuesses).to.eql([1]);
+    });
+
+    it('Should calculate and return a percentage of correct guesses', () => {
+      round.takeTurn('Round');
+      round.takeTurn('jacket');
+      expect(round.calculatePercentCorrect()).to.eql(66);
+    });
+
+    it('Should print an interpolated string', () => {
+      round.takeTurn('Round');
+      round.takeTurn('jacket');
+      expect(round.endRound()).to.eql(`Round Over!  You answered 66% of the questions correctly!`);
     });
   });
 
